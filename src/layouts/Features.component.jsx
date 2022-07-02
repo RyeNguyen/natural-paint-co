@@ -13,7 +13,7 @@ const Features = () => {
       <FeaturesHeadline>Sustainable, natural, beautiful</FeaturesHeadline>
       <FeaturesList className='layout--flex'>
         {FeaturesData.map(feature => (
-            <Feature id={feature.id}>
+            <Feature key={feature.id}>
                 <FeatureIcon src={feature.icon}/>
                 <FeatureName>{feature.nameLine1}<br/>{feature.nameLine2}</FeatureName>
             </Feature>

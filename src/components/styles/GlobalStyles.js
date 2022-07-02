@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { colorTheme } from "./ColorStyles";
+import { variables } from "./GlobalVariables";
 
 export const GlobalStyles = createGlobalStyle`
     body {
@@ -27,5 +28,11 @@ export const GlobalStyles = createGlobalStyle`
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+    }
+
+    .colour--active {
+        flex: 8;
+        cursor: default;
+        padding: ${variables.sizeLarge};
     }
 `;
