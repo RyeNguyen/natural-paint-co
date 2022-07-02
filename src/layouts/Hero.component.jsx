@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { colorTheme } from "../components/styles/ColorStyles";
 import { variables } from "../components/styles/GlobalVariables";
-import { Button } from "../components/styles/GlobalStyles";
+import Button from "../components/Button.component";
 
 import HeroImage from "../assets/images/Red-Hero-slightly-darker.jpg";
 import HeroIcon from "../assets/icons/icon-flower-brush.svg";
@@ -18,7 +18,7 @@ const Hero = () => {
           <br />
           creating future memories
         </HeroHeadline>
-        <HeroButton>Explore Colour</HeroButton>
+        <Button title="Explore Colour" isDarkMode={false} backgroundColor={colorTheme.text}/>
       </HeroImageWrapper>
       <HeroImageFooter className="layout--flex">
         <Favorite>

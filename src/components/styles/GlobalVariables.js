@@ -5,5 +5,8 @@ export const variables = {
     sizeMedium: '16px',
     sizeExtraMedium: '24px',
     sizeLarge: '32px',
-    sizeExtraLarge: '48px'
+    sizeExtraLarge: '48px',
+    sizeHuge: '64px',
+    sizeExtraHuge: '96px',
+    sizeMassive: '128px'
 }

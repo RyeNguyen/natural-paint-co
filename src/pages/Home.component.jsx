@@ -4,6 +4,9 @@ import { variables } from "../components/styles/GlobalVariables";
 
 import Navbar from "../components/Navbar.component";
 import Hero from "../layouts/Hero.component";
+import Features from "../layouts/Features.component";
+import Colours from "../layouts/Colours.component";
+
 import {colorTheme} from "../components/styles/ColorStyles";
 import {TextLarge, TextMedium} from "../components/styles/TextStyles";
 
@@ -18,6 +21,8 @@ const Home = () => {
             <DropdownWrapper className='layout--center'>
                 <DropdownLabel>I want to paint my:</DropdownLabel>
             </DropdownWrapper>
+            <Features/>
+            <Colours/>
         </>
     );
 };
