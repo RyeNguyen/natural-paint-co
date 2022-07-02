@@ -35,6 +35,7 @@ const Hero = () => {
 
 const HeroWrapper = styled.div`
   width: 100%;
+  height: 90vh;
   background-color: ${colorTheme.primary};
   padding: ${variables.sizeSmall} ${variables.sizeExtraLarge}
     ${variables.sizeExtraLarge};
