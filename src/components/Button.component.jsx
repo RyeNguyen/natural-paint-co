@@ -5,10 +5,10 @@ import { variables } from "./styles/GlobalVariables";
 import { colorTheme } from "./styles/ColorStyles";
 
 const Button = (props) => {
-  const { title, isDarkMode, backgroundColor } = props;
+  const { title, color = colorTheme.text, backgroundColor = 'transparent'} = props;
 
   return (
-    <NiceButton isDarkMode={isDarkMode} backgroundColor={backgroundColor}>
+    <NiceButton color={color} backgroundColor={backgroundColor}>
       {title}
     </NiceButton>
   );
@@ -19,12 +19,11 @@ const NiceButton = styled.button`
   background-color: ${(props) =>
     props.backgroundColor ? props.backgroundColor : "transparent"};
   padding: ${variables.sizeMediumSmall} ${variables.sizeLarge};
-  color: ${(props) =>
-    props.isDarkMode ? colorTheme.text : colorTheme.secondary};
+  color: ${(props) => props.color};
   border: 1px solid
     ${(props) => {
-      if (props.backgroundColor) return props.backgroundColor;
-      return props.isDarkMode ? colorTheme.text : colorTheme.secondary;
+      if (props.backgroundColor !== 'transparent') return props.backgroundColor;
+      return props.color;
     }};
   font-size: 16px;
   font-weight: 500;

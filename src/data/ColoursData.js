@@ -22,5 +22,11 @@ export const ColoursData = [
         color: '#5D7152',
         name: 'Bush Block',
         price: 6
+    },
+    {
+        id: 5,
+        color: '#eff1f3',
+        name: 'Starlight',
+        price: 7
     }
 ]
