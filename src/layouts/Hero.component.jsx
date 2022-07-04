@@ -18,7 +18,7 @@ const Hero = () => {
           <br />
           creating future memories
         </HeroHeadline>
-        <Button title="Explore Colour" backgroundColor={colorTheme.text}/>
+        <Button title="Explore Colour" backgroundColor={colorTheme.text} color={colorTheme.secondary}/>
       </HeroImageWrapper>
       <HeroImageFooter className="layout--flex">
         <Favorite>

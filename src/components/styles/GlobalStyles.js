@@ -46,4 +46,39 @@ export const GlobalStyles = createGlobalStyle`
       opacity: 1;
     }
   }
+  
+  .slider-container {
+    .slider-control-centerleft,
+    .slider-control-centerright {
+      display: none;
+    }
+    
+    .slider-control-bottomcenter {
+      left: 15% !important;
+      bottom: 5% !important;
+    }
+    
+    .slider-list {
+      height: 100%;
+    }
+    
+    .paging-item {
+      button {
+        opacity: 0.3 !important;
+        
+        svg {
+          circle {
+            width: 8px;
+            height: 8px;
+          }
+        }
+      }
+    }
+    
+    .paging-item.active {
+      button {
+        opacity: 1 !important;
+      }
+    }
+  }
 `;
