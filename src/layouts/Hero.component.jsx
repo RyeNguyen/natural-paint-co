@@ -35,15 +35,14 @@ const Hero = () => {
 
 const HeroWrapper = styled.div`
   width: 100%;
-  height: 90vh;
+  height: 100vh;
   background-color: ${colorTheme.primary};
-  padding: ${variables.sizeSmall} ${variables.sizeExtraLarge}
-    ${variables.sizeExtraLarge};
+  padding: ${variables.sizeExtraHuge} ${variables.sizeExtraLarge} ${variables.sizeExtraLarge};
 `;
 
 const HeroImageWrapper = styled.div`
   width: 100%;
-  height: 70vh;
+  height: 90%;
   background-image: url(${HeroImage});
   flex-direction: column;
   gap: ${variables.sizeLarge};
@@ -56,11 +55,6 @@ const HeroIconWrapper = styled.img`
 const HeroHeadline = styled(H1)`
   color: ${colorTheme.secondary};
   text-align: center;
-`;
-
-const HeroButton = styled(Button)`
-  background-color: ${colorTheme.text};
-  border-color: ${colorTheme.text};
 `;
 
 const HeroImageFooter = styled.div`

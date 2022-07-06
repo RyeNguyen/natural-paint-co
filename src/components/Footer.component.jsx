@@ -78,8 +78,6 @@ const FooterForm = styled.div`
 
 const FooterFormLabel = styled(H3)``;
 
-const FooterFormInput = styled.input``;
-
 const FooterMiddle = styled.div`
   margin-bottom: ${variables.sizeExtraLarge};
 `;

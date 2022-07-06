@@ -1,20 +1,49 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import { colorTheme } from "../components/styles/ColorStyles";
-import { variables } from "../components/styles/GlobalVariables";
-import { BodyMain, TextMedium } from "../components/styles/TextStyles";
+
+import {debounce} from "../utilities/helpers";
+
+import {colorTheme} from "./styles/ColorStyles";
+import {variables} from "./styles/GlobalVariables";
+import {BodyMain, TextMedium} from "./styles/TextStyles";
 
 const Navbar = () => {
-  return (
-    <NavbarWrapper className="layout--flex">
-      <NavbarLogo>
-        <svg
-          viewBox="0 0 117.8 51"
-          aria-labelledby="title-logo"
-          className="w-full h-full fill-current"
-        >
-          <path
-            d="M68.5,38.1V42c0,2.1,0,3.9,0.2,4.8c0.2,1,0.9,1.5,1.6,1.5c0.9,0,1.8-0.4,2.4-1.1c0.3-0.3,0.6,0.1,0.4,0.4
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+    const [visible, setVisible] = useState(true);
+
+    const handleScroll = debounce(() => {
+        // find current scroll position
+        const currentScrollPos = window.pageYOffset;
+
+        // set state based on location info (explained in more detail below)
+        setVisible((prevScrollPos > currentScrollPos && prevScrollPos - currentScrollPos > 50) || currentScrollPos < 10);
+
+        // set state to new scroll position
+        setPrevScrollPos(currentScrollPos);
+    }, 80);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => window.removeEventListener('scroll', handleScroll);
+
+    }, [prevScrollPos, visible, handleScroll]);
+
+    return (
+        <NavbarWrapper style={{top: visible ? '0' : '-20%'}}>
+            <PreNavbar className='layout--center'>
+                <PreNavbarText>Free shipping on NZ orders $99+, AU orders $279</PreNavbarText>
+            </PreNavbar>
+            <MainNavbar className="layout--flex">
+                <NavbarLogo>
+                    <svg
+                        viewBox="0 0 117.8 51"
+                        aria-labelledby="title-logo"
+                        className="w-full h-full fill-current"
+                    >
+                        <path
+                            d="M68.5,38.1V42c0,2.1,0,3.9,0.2,4.8c0.2,1,0.9,1.5,1.6,1.5c0.9,0,1.8-0.4,2.4-1.1c0.3-0.3,0.6,0.1,0.4,0.4
     c-0.8,1-1.7,1.8-2.8,2.4c-0.9,0.6-2,0.9-3.1,0.9c-0.4,0-0.9,0-1.3-0.2c-0.4-0.2-0.8-0.4-1.1-0.7c-0.6-0.7-0.9-1.8-0.9-3.2
     c0-1,0.1-3.7,0.1-5.1c0-1.2,0-2.2,0-3.5c-0.9,0-1.8,0-2.4,0.1c-0.3,0-0.4-0.2-0.1-0.4c1.4-0.8,2.6-1.8,3.7-2.9
     c1.1-1.2,2-2.4,2.9-3.8c0.2-0.3,0.5-0.3,0.5,0.1c-0.1,1.1-0.1,3-0.1,4.3V36c2,0,4,0,4.8,0c0,0.7-0.1,1.5-0.3,2.2
@@ -95,25 +124,46 @@ const Navbar = () => {
     c0.7-1.2,1.6-2.1,2.8-2.8c1.3-0.8,3.1-1.2,4.6-1.2c1.9,0,3.8,0.7,5.3,1.9C112.1,38.8,113,40.8,113,43.2z M108,43.8
     c0-4.1-1.4-7.3-3.4-7.5c-1.8,0.5-2.7,3.2-2.7,6.3c0,4,1.4,7,3.6,7.7C107,49.8,108,46.9,108,43.8z M115.7,46.2
     c-1.4,0-2.5,0.9-2.5,2.4c0,1.2,0.8,2.1,2.1,2.1c1.4,0,2.5-0.9,2.5-2.4C117.8,47.1,117,46.2,115.7,46.2z"
-          ></path>
-        </svg>
-      </NavbarLogo>
-      <NavbarLinksWrapper>
-        <NavbarLinkUppercase>Shop</NavbarLinkUppercase>
-        <NavbarLinkUppercase>Colours</NavbarLinkUppercase>
-        <NavbarLinkUppercase>Our Different</NavbarLinkUppercase>
-      </NavbarLinksWrapper>
-      <NavbarLinksWrapper>
-        <NavbarLink>Login</NavbarLink>
-        <NavbarLink>Calculator</NavbarLink>
-        <NavbarLink>Chat</NavbarLink>
-      </NavbarLinksWrapper>
-    </NavbarWrapper>
-  );
+                        ></path>
+                    </svg>
+                </NavbarLogo>
+                <NavbarLinksWrapper>
+                    <NavbarLinkUppercase>Shop</NavbarLinkUppercase>
+                    <NavbarLinkUppercase>Colours</NavbarLinkUppercase>
+                    <NavbarLinkUppercase>Our Difference</NavbarLinkUppercase>
+                </NavbarLinksWrapper>
+                <NavbarLinksWrapper>
+                    <NavbarLink>Login</NavbarLink>
+                    <NavbarLink>Calculator</NavbarLink>
+                    <NavbarLink>Chat</NavbarLink>
+                </NavbarLinksWrapper>
+            </MainNavbar>
+        </NavbarWrapper>
+
+    );
 };
 
 const NavbarWrapper = styled.div`
   width: 100%;
+  position: fixed;
+  left: 0;
+  top: 3%;
+  z-index: 3;
+  transition: all 0.5s ease-in-out;
+`;
+
+const PreNavbar = styled.div`
+  width: 100%;
+  padding: ${variables.sizeSmall} 0;
+  background-color: black;
+`;
+
+const PreNavbarText = styled(TextMedium)`
+  font-weight: 600;
+  color: ${colorTheme.secondary};
+`;
+
+const MainNavbar = styled.div`
   background-color: ${colorTheme.primary};
   padding: ${variables.sizeExtraMedium} ${variables.sizeExtraLarge};
 `;
@@ -131,6 +181,7 @@ const NavbarLinksWrapper = styled.div`
 const NavbarLinkUppercase = styled(TextMedium)`
   text-transform: uppercase;
   cursor: pointer;
+  letter-spacing: 0.7px;
 `;
 
 const NavbarLink = styled(BodyMain)`

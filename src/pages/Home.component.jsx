@@ -20,9 +20,6 @@ import Carousel from "../layouts/Testimonials.component";
 const Home = () => {
     return (
         <>
-            <PreNavbar className='layout--center'>
-                <PreNavbarText>Free shipping on NZ orders $99+, AU orders $279</PreNavbarText>
-            </PreNavbar>
             <Navbar/>
             <Hero/>
             <DropdownWrapper className='layout--center'>
@@ -53,17 +50,6 @@ const Home = () => {
         </>
     );
 };
-
-const PreNavbar = styled.div`
-  width: 100%;
-  padding: ${variables.sizeSmall} 0;
-  background-color: black;
-`;
-
-const PreNavbarText = styled(TextMedium)`
-  font-weight: 600;
-  color: ${colorTheme.secondary};
-`;
 
 const DropdownWrapper = styled.div`
   width: 100%;
