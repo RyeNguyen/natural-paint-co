@@ -6,6 +6,9 @@ import Navbar from "../components/Navbar.component";
 import Hero from "../layouts/Hero.component";
 import Features from "../layouts/Features.component";
 import Colours from "../layouts/Colours.component";
+import BlogSection from "../layouts/Blog.component";
+import ContactSection from "../layouts/Contact.component";
+import Footer from "../components/Footer.component";
 
 import {colorTheme} from "../components/styles/ColorStyles";
 import {BodyMain, H2, TextLarge, TextMedium} from "../components/styles/TextStyles";
@@ -44,6 +47,9 @@ const Home = () => {
                 <DividerLabel>Free Shipping on non-rural NZ orders over $99</DividerLabel>
             </DividerSection>
             <Carousel/>
+            <BlogSection/>
+            <ContactSection/>
+            <Footer/>
         </>
     );
 };

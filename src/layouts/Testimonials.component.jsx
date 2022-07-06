@@ -9,13 +9,14 @@ import {variables} from "../components/styles/GlobalVariables";
 const Testimonials = () => {
     return (
         <Carousel
-            animation="fade"
+            animation="slide"
             autoplay
-            autoplayInterval={4000}
+            autoplayInterval={6000}
             enableKeyboardControls
             speed={3000}
             dragging={false}
             dragThreshold={0.2}
+            pauseOnHover={false}
             wrapAround
             style={{height: '850px'}}
         >

@@ -60,6 +60,14 @@ export const GlobalStyles = createGlobalStyle`
     
     .slider-list {
       height: 100%;
+      
+      .slide {
+        opacity: 0 !important;
+      }
+      
+      .slide-current {
+        opacity: 1 !important;
+      }
     }
     
     .paging-item {
