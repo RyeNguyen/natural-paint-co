@@ -1,5 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
+import { SmoothProvider } from 'react-smooth-scrolling'
+
 import {variables} from "../components/styles/GlobalVariables";
 
 import Navbar from "../components/Navbar.component";
@@ -19,7 +21,7 @@ import Carousel from "../layouts/Testimonials.component";
 
 const Home = () => {
     return (
-        <>
+        <SmoothProvider skew={true} ease={0.1}>
             <Navbar/>
             <Hero/>
             <DropdownWrapper className='layout--center'>
@@ -47,7 +49,7 @@ const Home = () => {
             <BlogSection/>
             <ContactSection/>
             <Footer/>
-        </>
+        </SmoothProvider>
     );
 };
 

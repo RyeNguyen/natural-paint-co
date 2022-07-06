@@ -12,6 +12,8 @@ const Navbar = () => {
 
     const [visible, setVisible] = useState(true);
 
+    const [bannerVisible, setBannerVisible] = useState(true);
+
     const handleScroll = debounce(() => {
         // find current scroll position
         const currentScrollPos = window.pageYOffset;
@@ -32,8 +34,12 @@ const Navbar = () => {
 
     return (
         <NavbarWrapper style={{top: visible ? '0' : '-20%'}}>
-            <PreNavbar className='layout--center'>
+            <PreNavbar className='layout--flex' style={{transform: bannerVisible ? '' : 'translateX(-100%)', display: bannerVisible ? 'flex' : 'none'}}>
+                <div/>
                 <PreNavbarText>Free shipping on NZ orders $99+, AU orders $279</PreNavbarText>
+                <PreNavbarButton onClick={() => setBannerVisible(false)}>
+                <svg viewBox="0 0 44 44" class="w-full h-full fill-current"><path d="M44 40.4l-4.1 4.1L22 26.6 4.1 44.5 0 40.3l17.9-17.9L0 4.6 4.1.5 22 18.4 39.9.5 44 4.7 26.1 22.5 44 40.4z"></path></svg>
+                </PreNavbarButton>
             </PreNavbar>
             <MainNavbar className="layout--flex">
                 <NavbarLogo>
@@ -148,19 +154,36 @@ const NavbarWrapper = styled.div`
   position: fixed;
   left: 0;
   top: 3%;
+  overflow: hidden;
   z-index: 3;
   transition: all 0.5s ease-in-out;
 `;
 
 const PreNavbar = styled.div`
   width: 100%;
-  padding: ${variables.sizeSmall} 0;
+  padding: ${variables.sizeSmall} ${variables.sizeMediumSmall};
   background-color: black;
+  transition: all 0.3s ease-in-out;
 `;
 
 const PreNavbarText = styled(TextMedium)`
   font-weight: 600;
   color: ${colorTheme.secondary};
+`;
+
+const PreNavbarButton = styled.div`
+  width: ${variables.sizeMediumSmall};
+  height: ${variables.sizeMediumSmall};
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  svg {
+    fill: white;
+  }
+
+  :hover {
+    transform: scale(1.3) rotate(90deg);
+  }
 `;
 
 const MainNavbar = styled.div`

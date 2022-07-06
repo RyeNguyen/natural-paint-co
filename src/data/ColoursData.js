@@ -25,8 +25,8 @@ export const ColoursData = [
     },
     {
         id: 5,
-        color: '#eff1f3',
-        name: 'Starlight',
+        color: '#F8ECDD',
+        name: 'Lucid Dream',
         price: 7
     }
 ]
