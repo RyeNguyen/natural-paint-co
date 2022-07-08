@@ -6,11 +6,11 @@ import { BodyMain, H3 } from "../components/styles/TextStyles";
 import { ColoursData } from "../data/ColoursData";
 import { colorTheme } from "../components/styles/ColorStyles";
 
-import Button from "../components/Button.component";
+import {Button} from "../components";
 
 const ContrastChecker = require("color-contrast-calc").ContrastChecker;
 
-const Colours = () => {
+export const Colours = () => {
   const [activeColour, setActiveColour] = useState(1);
 
   const calculateTextColor = (bgColor) => {
@@ -109,5 +109,3 @@ const ColourButtons = styled.div`
   display: none;
   opacity: 0;
 `;
-
-export default Colours;

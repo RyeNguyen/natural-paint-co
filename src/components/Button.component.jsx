@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { variables } from "./styles/GlobalVariables";
 import { colorTheme } from "./styles/ColorStyles";
 
-const Button = (props) => {
+export const Button = (props) => {
   const { title, color = colorTheme.text, backgroundColor = 'transparent'} = props;
 
   return (
@@ -31,5 +31,3 @@ const NiceButton = styled.button`
   font-family: "Montserrat", sans-serif;
   cursor: pointer;
 `;
-
-export default Button;

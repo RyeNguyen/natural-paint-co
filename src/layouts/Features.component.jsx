@@ -7,7 +7,7 @@ import { TextLarge, TextMedium } from "../components/styles/TextStyles";
 
 import { FeaturesData } from "../data/FeaturesData";
 
-const Features = () => {
+export const Features = () => {
   return (
     <FeaturesWrapper>
       <FeaturesHeadline>Sustainable, natural, beautiful</FeaturesHeadline>
@@ -55,5 +55,3 @@ const FeatureIcon = styled.img`
 const FeatureName = styled(TextMedium)`
     text-align: center;
 `;
-
-export default Features;

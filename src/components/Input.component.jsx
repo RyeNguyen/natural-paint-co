@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {variables} from "./styles/GlobalVariables";
 import {colorTheme} from "./styles/ColorStyles";
 
-const Input = (props) => {
+export const Input = (props) => {
     const {inputPlaceholder} = props;
 
     return (
@@ -27,5 +27,3 @@ const InputWrapper = styled.input`
     font-weight: 500;
   }
 `;
-
-export default Input;

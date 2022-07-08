@@ -6,7 +6,7 @@ import {TestimonialsData} from "../data/TestimonialsData";
 import {BodyMain, H3} from "../components/styles/TextStyles";
 import {variables} from "../components/styles/GlobalVariables";
 
-const Testimonials = () => {
+export const Testimonials = () => {
     return (
         <Carousel
             animation="slide"
@@ -67,5 +67,3 @@ const TestimonialImage = styled.img`
   width: 50%;
   background-image: url(${props => props.backgroundImg});
 `;
-
-export default Testimonials;

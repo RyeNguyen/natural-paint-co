@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Input from "./Input.component";
+import {Input} from "./Input.component";
 
 import Icon from '../assets/icons/icon-flower-brush.svg';
 import {variables} from "./styles/GlobalVariables";
 import {H3, TextSmall} from "./styles/TextStyles";
 import {colorTheme} from "./styles/ColorStyles";
 
-const Footer = () => {
+export const Footer = () => {
     return (
         <FooterWrapper>
             <FooterHeader className='layout--flex'>
@@ -105,5 +105,3 @@ const FooterLink = styled(TextSmall)`
   display: flex;
   margin-bottom: ${variables.sizeSmall};
 `;
-
-export default Footer;

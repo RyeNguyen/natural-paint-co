@@ -1,34 +1,25 @@
 import React from "react";
 import styled from 'styled-components';
-import { SmoothProvider } from 'react-smooth-scrolling'
+
+import {comp, layout} from '../exporter';
+import {Button} from "../components";
 
 import {variables} from "../components/styles/GlobalVariables";
-
-import Navbar from "../components/Navbar.component";
-import Hero from "../layouts/Hero.component";
-import Features from "../layouts/Features.component";
-import Colours from "../layouts/Colours.component";
-import BlogSection from "../layouts/Blog.component";
-import ContactSection from "../layouts/Contact.component";
-import Footer from "../components/Footer.component";
-
 import {colorTheme} from "../components/styles/ColorStyles";
 import {BodyMain, H2, TextLarge, TextMedium} from "../components/styles/TextStyles";
 
 import SectionImage from "../assets/images/Homepag-DoubleShot.png";
-import Button from "../components/Button.component";
-import Carousel from "../layouts/Testimonials.component";
 
 const Home = () => {
     return (
-        <SmoothProvider skew={true} ease={0.1}>
-            <Navbar/>
-            <Hero/>
+        <>
+            <comp.Navbar/>
+            <layout.Hero/>
             <DropdownWrapper className='layout--center'>
                 <DropdownLabel>I want to paint my:</DropdownLabel>
             </DropdownWrapper>
-            <Features/>
-            <Colours/>
+            <layout.Features/>
+            <layout.Colours/>
             <InfoWrapper className='layout--center'>
                 <InfoImage src={SectionImage}/>
                 <InfoContent>
@@ -45,11 +36,11 @@ const Home = () => {
             <DividerSection className='layout--center'>
                 <DividerLabel>Free Shipping on non-rural NZ orders over $99</DividerLabel>
             </DividerSection>
-            <Carousel/>
-            <BlogSection/>
-            <ContactSection/>
-            <Footer/>
-        </SmoothProvider>
+            <layout.Testimonials/>
+            <layout.BlogSection/>
+            <layout.ContactSection/>
+            <comp.Footer/>
+        </>
     );
 };
 

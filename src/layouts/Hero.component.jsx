@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { colorTheme } from "../components/styles/ColorStyles";
 import { variables } from "../components/styles/GlobalVariables";
-import Button from "../components/Button.component";
+import {Button} from "../components";
 
 import HeroImage from "../assets/images/Red-Hero-slightly-darker.jpg";
 import HeroIcon from "../assets/icons/icon-flower-brush.svg";
 import { BodyMain, H1, TextSmall } from "../components/styles/TextStyles";
 
-const Hero = () => {
+export const Hero = () => {
   return (
     <HeroWrapper>
       <HeroImageWrapper className="image-container layout--center">
@@ -80,5 +80,3 @@ const Review = styled.div`
 `;
 
 const ReviewText = styled(BodyMain)``;
-
-export default Hero;

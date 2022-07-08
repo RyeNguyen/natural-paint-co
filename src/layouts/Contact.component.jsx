@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 import ContactImage from '../assets/images/VOCFree_Cropped-01_2022-06-23-031752_xvdm.png';
 import ContactIcon from '../assets/icons/icon-leafs-white.svg';
-import Button from "../components/Button.component";
+import {Button} from "../components";
 import {colorTheme} from "../components/styles/ColorStyles";
 import {variables} from "../components/styles/GlobalVariables";
 import {H1, TextMedium} from "../components/styles/TextStyles";
 
-const ContactSection = () => {
+export const ContactSection = () => {
     return (
         <ContactWrapper>
             <ContactImg backgroundImage={ContactImage} className='image-container'/>
@@ -55,5 +55,3 @@ const ContactDesc = styled(TextMedium)`
   margin-bottom: ${variables.sizeMassive};
   width: 80%;
 `;
-
-export default ContactSection;

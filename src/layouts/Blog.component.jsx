@@ -6,7 +6,7 @@ import {variables} from "../components/styles/GlobalVariables";
 import {colorTheme} from "../components/styles/ColorStyles";
 import {H3} from "../components/styles/TextStyles";
 
-const BlogSection = () => {
+export const BlogSection = () => {
     return (
         <BlogWrapper >
             <BlogHeadline>Explore Natural Paint Co</BlogHeadline>
@@ -51,5 +51,3 @@ const BlogCardImg = styled.img`
 `;
 
 const BlogCardTitle = styled(H3)``;
-
-export default BlogSection;

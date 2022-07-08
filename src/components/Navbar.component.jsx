@@ -7,7 +7,7 @@ import {colorTheme} from "./styles/ColorStyles";
 import {variables} from "./styles/GlobalVariables";
 import {BodyMain, TextMedium} from "./styles/TextStyles";
 
-const Navbar = () => {
+export const Navbar = () => {
     const [prevScrollPos, setPrevScrollPos] = useState(0);
 
     const [visible, setVisible] = useState(true);
@@ -38,7 +38,7 @@ const Navbar = () => {
                 <div/>
                 <PreNavbarText>Free shipping on NZ orders $99+, AU orders $279</PreNavbarText>
                 <PreNavbarButton onClick={() => setBannerVisible(false)}>
-                <svg viewBox="0 0 44 44" class="w-full h-full fill-current"><path d="M44 40.4l-4.1 4.1L22 26.6 4.1 44.5 0 40.3l17.9-17.9L0 4.6 4.1.5 22 18.4 39.9.5 44 4.7 26.1 22.5 44 40.4z"></path></svg>
+                <svg viewBox="0 0 44 44" className="w-full h-full fill-current"><path d="M44 40.4l-4.1 4.1L22 26.6 4.1 44.5 0 40.3l17.9-17.9L0 4.6 4.1.5 22 18.4 39.9.5 44 4.7 26.1 22.5 44 40.4z"></path></svg>
                 </PreNavbarButton>
             </PreNavbar>
             <MainNavbar className="layout--flex">
@@ -210,5 +210,3 @@ const NavbarLinkUppercase = styled(TextMedium)`
 const NavbarLink = styled(BodyMain)`
   cursor: pointer;
 `;
-
-export default Navbar;
