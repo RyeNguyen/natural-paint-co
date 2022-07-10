@@ -1,24 +1,97 @@
 import React from "react";
 import styled from "styled-components";
+import { m } from "framer-motion";
+
 import { colorTheme } from "../components/styles/ColorStyles";
 import { variables } from "../components/styles/GlobalVariables";
-import {Button} from "../components";
+import { Button } from "../components";
 
 import HeroImage from "../assets/images/Red-Hero-slightly-darker.jpg";
 import HeroIcon from "../assets/icons/icon-flower-brush.svg";
 import { BodyMain, H1, TextSmall } from "../components/styles/TextStyles";
 
+const heroLayoutVariants = {
+  hidden: {
+    height: 0,
+    transition: {
+      ease: [0.398, 0.305, 0, 0.995],
+      duration: 2,
+    },
+  },
+  visible: {
+    height: "100%",
+  },
+};
+
+const heroIconVariants = {
+  hidden: {
+    transform: 'scale(5)',
+    zIndex: 4,
+    filter: 'invert(100%)'
+  },
+  visible: {
+    transform: 'scale(1)',
+    zIndex: 1,
+    filter: 'invert(0)',
+    top: '0',
+    left: '0',
+    position: 'relative',
+    transition: {
+      delay: 1,
+      ease: [0.398, 0.305, 0, 0.995],
+      duration: 1,
+    }
+  }
+};
+
+const heroHeadlineVariants = {
+  hidden: {
+    transform: "scale(0)",
+    opacity: 0,
+  },
+  visible: {
+    transform: "scale(1)",
+    opacity: 1,
+    transition: {
+      delay: 1.5,
+      ease: [0.398, 0.305, 0, 0.995],
+      duration: 2,
+    },
+  },
+};
+
 export const Hero = () => {
   return (
     <HeroWrapper>
+      <HeroColorLayout
+        as={m.div}
+        variants={heroLayoutVariants}
+        initial="visible"
+        animate="hidden"
+      />
       <HeroImageWrapper className="image-container layout--center">
-        <HeroIconWrapper src={HeroIcon} />
-        <HeroHeadline>
+        <HeroIconWrapper 
+        src={HeroIcon} 
+        as={m.img}
+        variants={heroIconVariants}
+          initial="hidden"
+          animate="visible"
+        />
+        <HeroHeadline
+          as={m.h1}
+          variants={heroHeadlineVariants}
+          initial="hidden"
+          animate="visible"
+        >
           Plant-based paint
           <br />
           creating future memories
         </HeroHeadline>
-        <Button title="Explore Colour" backgroundColor={colorTheme.text} color={colorTheme.secondary}/>
+        <Button
+          title="Explore Colour"
+          backgroundColor={colorTheme.text}
+          color={colorTheme.secondary}
+        />
       </HeroImageWrapper>
       <HeroImageFooter className="layout--flex">
         <Favorite>
@@ -37,13 +110,26 @@ const HeroWrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-color: ${colorTheme.primary};
-  padding: ${variables.sizeExtraHuge} ${variables.sizeExtraLarge} ${variables.sizeExtraLarge};
+  padding: ${variables.sizeExtraHuge} ${variables.sizeExtraLarge}
+    ${variables.sizeExtraLarge};
+  position: relative;
+`;
+
+const HeroColorLayout = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: ${colorTheme.primary};
 `;
 
 const HeroImageWrapper = styled.div`
   width: 100%;
   height: 90%;
   background-image: url(${HeroImage});
+  background-attachment: fixed;
+  background-size: 100%;
   flex-direction: column;
   gap: ${variables.sizeLarge};
 `;

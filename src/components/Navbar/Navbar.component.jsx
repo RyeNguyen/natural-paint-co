@@ -1,66 +1,96 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { m } from "framer-motion";
 
-import {debounce} from "../../utilities/helpers";
+import { debounce } from "../../utilities/helpers";
 
 import NavbarPopup from "./NavbarPopup.component";
 
-import {colorTheme} from "../styles/ColorStyles";
-import {variables} from "../styles/GlobalVariables";
-import {BodyMain, TextMedium} from "../styles/TextStyles";
+import { colorTheme } from "../styles/ColorStyles";
+import { variables } from "../styles/GlobalVariables";
+import { BodyMain, TextMedium } from "../styles/TextStyles";
 
-import Arrow from '../../assets/icons/triangle-arrow.svg';
-import Heart from '../../assets/icons/icon-heart-outline.svg';
+import Arrow from "../../assets/icons/triangle-arrow.svg";
+import Heart from "../../assets/icons/icon-heart-outline.svg";
+
+const navbarVariants = {
+  hidden: {
+    opacity: 0,
+    transform: "translateY(-100%)",
+  },
+  animate: {
+    opacity: 1,
+    transform: "translateY(0)",
+    transition: {
+      delay: 1,
+      ease: [0.398, 0.305, 0, 0.995],
+      duration: 1.4,
+    },
+  },
+};
 
 export const Navbar = () => {
-    const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
 
-    const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(true);
 
-    const [bannerVisible, setBannerVisible] = useState(true);
+  const [bannerVisible, setBannerVisible] = useState(true);
 
-    const handleScroll = debounce(() => {
-        // find current scroll position
-        const currentScrollPos = window.pageYOffset;
+  const handleScroll = debounce(() => {
+    // find current scroll position
+    const currentScrollPos = window.pageYOffset;
 
-        // set state based on location info (explained in more detail below)
-        setVisible((prevScrollPos > currentScrollPos && prevScrollPos - currentScrollPos > 50) || currentScrollPos < 10);
+    // set state based on location info (explained in more detail below)
+    setVisible(
+      (prevScrollPos > currentScrollPos &&
+        prevScrollPos - currentScrollPos > 50) ||
+        currentScrollPos < 10
+    );
 
-        // set state to new scroll position
-        setPrevScrollPos(currentScrollPos);
-    }, 80);
+    // set state to new scroll position
+    setPrevScrollPos(currentScrollPos);
+  }, 80);
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
 
-        return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos, visible, handleScroll]);
 
-    }, [prevScrollPos, visible, handleScroll]);
+  return (
+    <>
+      <NavbarWrapper
+        visible={visible}
+        as={m.div}
+        variants={navbarVariants}
+        initial="hidden"
+        animate="animate"
+      >
+        {/*Some kind of a promotion banner*/}
+        <PreNavbar className="layout--flex" bannerVisible={bannerVisible}>
+          <div />
+          <PreNavbarText>
+            Free shipping on NZ orders $99+, AU orders $279
+          </PreNavbarText>
+          <PreNavbarButton onClick={() => setBannerVisible(false)}>
+            <svg viewBox="0 0 44 44" className="w-full h-full fill-current">
+              <path d="M44 40.4l-4.1 4.1L22 26.6 4.1 44.5 0 40.3l17.9-17.9L0 4.6 4.1.5 22 18.4 39.9.5 44 4.7 26.1 22.5 44 40.4z"></path>
+            </svg>
+          </PreNavbarButton>
+        </PreNavbar>
 
-    return (
-        <>
-            <NavbarWrapper visible={visible}>
-                {/*Some kind of a promotion banner*/}
-                <PreNavbar className='layout--flex' bannerVisible={bannerVisible}>
-                    <div/>
-                    <PreNavbarText>Free shipping on NZ orders $99+, AU orders $279</PreNavbarText>
-                    <PreNavbarButton onClick={() => setBannerVisible(false)}>
-                        <svg viewBox="0 0 44 44" className="w-full h-full fill-current"><path d="M44 40.4l-4.1 4.1L22 26.6 4.1 44.5 0 40.3l17.9-17.9L0 4.6 4.1.5 22 18.4 39.9.5 44 4.7 26.1 22.5 44 40.4z"></path></svg>
-                    </PreNavbarButton>
-                </PreNavbar>
-
-                {/*Main navigation bar*/}
-                <MainNavbar className="layout--flex" bannerVisible={bannerVisible}>
-                    <NavbarLogo>
-                        <Link to='/'>
-                            <svg
-                                viewBox="0 0 117.8 51"
-                                aria-labelledby="title-logo"
-                                className="w-full h-full fill-current"
-                            >
-                                <path
-                                    d="M68.5,38.1V42c0,2.1,0,3.9,0.2,4.8c0.2,1,0.9,1.5,1.6,1.5c0.9,0,1.8-0.4,2.4-1.1c0.3-0.3,0.6,0.1,0.4,0.4
+        {/*Main navigation bar*/}
+        <MainNavbar className="layout--flex" bannerVisible={bannerVisible}>
+          <NavbarLogo>
+            <Link to="/">
+              <svg
+                viewBox="0 0 117.8 51"
+                aria-labelledby="title-logo"
+                className="w-full h-full fill-current"
+              >
+                <path
+                  d="M68.5,38.1V42c0,2.1,0,3.9,0.2,4.8c0.2,1,0.9,1.5,1.6,1.5c0.9,0,1.8-0.4,2.4-1.1c0.3-0.3,0.6,0.1,0.4,0.4
     c-0.8,1-1.7,1.8-2.8,2.4c-0.9,0.6-2,0.9-3.1,0.9c-0.4,0-0.9,0-1.3-0.2c-0.4-0.2-0.8-0.4-1.1-0.7c-0.6-0.7-0.9-1.8-0.9-3.2
     c0-1,0.1-3.7,0.1-5.1c0-1.2,0-2.2,0-3.5c-0.9,0-1.8,0-2.4,0.1c-0.3,0-0.4-0.2-0.1-0.4c1.4-0.8,2.6-1.8,3.7-2.9
     c1.1-1.2,2-2.4,2.9-3.8c0.2-0.3,0.5-0.3,0.5,0.1c-0.1,1.1-0.1,3-0.1,4.3V36c2,0,4,0,4.8,0c0,0.7-0.1,1.5-0.3,2.2
@@ -141,41 +171,40 @@ export const Navbar = () => {
     c0.7-1.2,1.6-2.1,2.8-2.8c1.3-0.8,3.1-1.2,4.6-1.2c1.9,0,3.8,0.7,5.3,1.9C112.1,38.8,113,40.8,113,43.2z M108,43.8
     c0-4.1-1.4-7.3-3.4-7.5c-1.8,0.5-2.7,3.2-2.7,6.3c0,4,1.4,7,3.6,7.7C107,49.8,108,46.9,108,43.8z M115.7,46.2
     c-1.4,0-2.5,0.9-2.5,2.4c0,1.2,0.8,2.1,2.1,2.1c1.4,0,2.5-0.9,2.5-2.4C117.8,47.1,117,46.2,115.7,46.2z"
-                                ></path>
-                            </svg>
-                        </Link>
-                    </NavbarLogo>
-                    <NavbarLinksWrapper>
-                        <NavbarLinkUppercase>
-                            Shop
-                            <NavbarLinkArrow src={Arrow}/>
-                        </NavbarLinkUppercase>
-                        <NavbarLinkUppercase>Colours</NavbarLinkUppercase>
-                        <NavbarLinkUppercase>
-                            Our Difference
-                            <NavbarLinkArrow src={Arrow}/>
-                        </NavbarLinkUppercase>
-                    </NavbarLinksWrapper>
-                    <NavbarLinksWrapperSmallGap>
-                        <NavbarLink>
-                            <NavbarLinkIcon src={Heart}/>
-                        </NavbarLink>
-                        <NavbarLink>Login</NavbarLink>
-                        <NavbarLink>Calculator</NavbarLink>
-                        <NavbarLink>Chat</NavbarLink>
-                        <NavbarLink>
-                            <svg viewBox="0 0 44 44" className="w-full h-full fill-current">
-                                <path
-                                    d="M37.8 14.7C37.2 6.5 30.3 0 22 0S6.8 6.5 6.2 14.7h-5V44h41.6V14.7h-5zM22 2.4c7 0 12.8 5.4 13.4 12.2H8.6C9.2 7.8 15 2.4 22 2.4zm18.3 39.2H3.7V17.1h36.7v24.5z"></path>
-                            </svg>
-                            0
-                        </NavbarLink>
-                    </NavbarLinksWrapperSmallGap>
-                </MainNavbar>
-            </NavbarWrapper>
-            <NavbarPopup/>
-        </>
-    );
+                ></path>
+              </svg>
+            </Link>
+          </NavbarLogo>
+          <NavbarLinksWrapper>
+            <NavbarLinkUppercase>
+              Shop
+              <NavbarLinkArrow src={Arrow} />
+            </NavbarLinkUppercase>
+            <NavbarLinkUppercase>Colours</NavbarLinkUppercase>
+            <NavbarLinkUppercase>
+              Our Difference
+              <NavbarLinkArrow src={Arrow} />
+            </NavbarLinkUppercase>
+          </NavbarLinksWrapper>
+          <NavbarLinksWrapperSmallGap>
+            <NavbarLink>
+              <NavbarLinkIcon src={Heart} />
+            </NavbarLink>
+            <NavbarLink>Login</NavbarLink>
+            <NavbarLink>Calculator</NavbarLink>
+            <NavbarLink>Chat</NavbarLink>
+            <NavbarLink>
+              <svg viewBox="0 0 44 44" className="w-full h-full fill-current">
+                <path d="M37.8 14.7C37.2 6.5 30.3 0 22 0S6.8 6.5 6.2 14.7h-5V44h41.6V14.7h-5zM22 2.4c7 0 12.8 5.4 13.4 12.2H8.6C9.2 7.8 15 2.4 22 2.4zm18.3 39.2H3.7V17.1h36.7v24.5z"></path>
+              </svg>
+              0
+            </NavbarLink>
+          </NavbarLinksWrapperSmallGap>
+        </MainNavbar>
+      </NavbarWrapper>
+      <NavbarPopup />
+    </>
+  );
 };
 
 const NavbarWrapper = styled.div`
@@ -183,7 +212,7 @@ const NavbarWrapper = styled.div`
   height: auto;
   position: fixed;
   left: 0;
-  top: ${props => props.visible ? '0' : '-20%'};
+  top: ${(props) => (props.visible ? "0" : "-20%")};
   overflow: hidden;
   z-index: 3;
   transition: ${variables.transitionMain};
@@ -194,10 +223,12 @@ const PreNavbar = styled.div`
   height: ${variables.sizeLarge};
   padding: ${variables.sizeSmall} ${variables.sizeMediumSmall};
   background-color: black;
-  transform: translateX(${props => {
-      return props.bannerVisible ? '' : '-100vw';
-  }});
-  visibility: ${props => props.bannerVisible ? 'visible' : 'hidden'};
+  transform: translateX(
+    ${(props) => {
+      return props.bannerVisible ? "" : "-100vw";
+    }}
+  );
+  visibility: ${(props) => (props.bannerVisible ? "visible" : "hidden")};
   transition: ${variables.transitionMain};
 `;
 
@@ -225,7 +256,9 @@ const MainNavbar = styled.div`
   width: 100%;
   background-color: ${colorTheme.primary};
   padding: ${variables.sizeExtraMedium} ${variables.sizeExtraLarge};
-  transform: translateY(${props => props.bannerVisible ? '0' : `-${variables.sizeLarge}`});
+  transform: translateY(
+    ${(props) => (props.bannerVisible ? "0" : `-${variables.sizeLarge}`)}
+  );
   transition: ${variables.transitionMain};
 `;
 
@@ -233,7 +266,7 @@ const NavbarLogo = styled.div`
   width: 7%;
   cursor: pointer;
   transition: ${variables.transitionMain};
-  
+
   :hover {
     opacity: 0.75;
   }
@@ -244,15 +277,15 @@ const NavbarLinksWrapper = styled.div`
   align-items: center;
   gap: ${variables.sizeExtraLarge};
   pointer-events: none;
-  
+
   > p {
     pointer-events: auto;
   }
-  
+
   :hover > p {
     opacity: 1;
   }
-  
+
   :hover > p:not(:hover) {
     opacity: 0.75;
   }
@@ -272,7 +305,7 @@ const NavbarLinkUppercase = styled(TextMedium)`
   align-items: center;
   gap: ${variables.sizeSmall};
   transition: ${variables.transitionMain};
-  
+
   :hover {
     letter-spacing: 1.5px;
   }
@@ -290,11 +323,11 @@ const NavbarLink = styled(BodyMain)`
   display: flex;
   align-items: center;
   gap: ${variables.sizeSmall};
-  
+
   :hover {
     opacity: 0.75;
   }
-  
+
   svg {
     width: ${variables.sizeExtraMedium};
     transform: translateY(-2px);
